@@ -1,23 +1,24 @@
-import MapTile from './game-generation/MapTile';
 import possibleMapTilenames from './game-generation/map-tiles';
+import { getPositionFromIndex } from './utils';
 
-const WIDTH = 100;
-const HEIGHT = 100;
+export const WIDTH = 100;
+export const HEIGHT = 100;
 
 const getRandomTilename = () => possibleMapTilenames[
   Math.floor(Math.random() * possibleMapTilenames.length)
-]
+  ]
 
 export const ExploringBorders = {
   setup: () => ({
     width: WIDTH,
     height: HEIGHT,
     tiles:
-      Array(HEIGHT).fill(null).map(
-        (_, y) => Array(WIDTH).fill(null).map(
-          (_, x) => new MapTile({ x, y, tile: getRandomTilename() }),
-        ),
+      Array(HEIGHT * WIDTH).fill(null).map(
+        (_, index) => ({
+          ...getPositionFromIndex(index),
+          tile: getRandomTilename(),
+        }),
       ),
+    moves: {},
   }),
-  moves: {},
 }
