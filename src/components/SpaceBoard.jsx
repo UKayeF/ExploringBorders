@@ -2,6 +2,7 @@ import React from 'react';
 import TileGrid from './tiles/TileGrid';
 
 const SpaceBoard = (props) => {
+  //TODO why is changeQuadrant not in there?
   console.log(props.moves)
   return (
     <div>

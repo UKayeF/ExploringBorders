@@ -25,7 +25,7 @@ export const ExploringBorders = {
       moveLimit: 1,
     },
     moves: {
-      clickCell: (G, ctx, direction) => {
+      changeQuadrant: (G, ctx, direction) => {
         const { x, y } = G.position;
         let targetX = x, targetY = y;
         switch (direction) {
