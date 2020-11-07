@@ -1,6 +1,6 @@
 import possibleMapTilenames from './game-generation/map-tiles';
 import { getPositionFromIndex, inRange } from './utils';
-import { INVALID_MOVE } from 'boardgame.io/core';
+import { INVALID_MOVE, TurnOrder } from 'boardgame.io/core';
 
 export const TILES_PER_ROW = 20;
 export const ROW_COUNT = 20;
@@ -8,6 +8,10 @@ export const ROW_COUNT = 20;
 const getRandomTilename = () => possibleMapTilenames[
   Math.floor(Math.random() * possibleMapTilenames.length)
   ]
+
+function IsVictory({ x, y }) {
+  return (x === TILES_PER_ROW - 1 && y === ROW_COUNT - 1);
+}
 
 export const ExploringBorders = {
   setup: () => ({
@@ -26,7 +30,13 @@ export const ExploringBorders = {
       ),
   }),
   turn: {
+    order: TurnOrder.CONTINUE,
     moveLimit: 1,
+  },
+  endIf: (G, ctx) => {
+    if (IsVictory(G.position)) {
+      return { winner: ctx.currentPlayer }
+    }
   },
   moves: {
     tryQuadrantChange: (G, ctx, direction, activeTodo) => {
@@ -67,6 +77,6 @@ export const ExploringBorders = {
     completeTodo: (G, ctx) => {
       G.todoComplete = true;
       G.activeTodo = null;
-    }
+    },
   },
 }

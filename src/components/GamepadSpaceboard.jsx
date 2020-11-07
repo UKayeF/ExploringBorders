@@ -29,6 +29,9 @@ const GamepadSpaceboard = (props) => {
   }, [])
   return (
     <div>
+      {
+        props.ctx.gameover ? 'We have succeeded!' : null
+      }
       <Gamepad
         layout={xbox}
         onUp={() => {
