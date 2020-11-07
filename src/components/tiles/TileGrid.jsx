@@ -16,7 +16,6 @@ const useStyles = createUseStyles({
     width: CELL_WIDTH - 2,
     height: CELL_HEIGHT - 2,
     border: '1px solid black',
-    // background: `url('../assets/spritesheets/space_y_constellation.png') left center`,
   },
 })
 
@@ -33,8 +32,13 @@ const TileGrid = ({ tiles, position, moves }) => {
   const getAdjacentTileIndices = () => ({
     up: (playerY + 1) * TILES_PER_ROW + playerX,
     down: (playerY - 1) * TILES_PER_ROW + playerX,
-    right: playerY * TILES_PER_ROW + (playerX + 1),
-    left: playerY * TILES_PER_ROW + (playerX - 1),
+    right: (playerX < TILES_PER_ROW - 1)
+      ? playerY * TILES_PER_ROW + (playerX + 1)
+      : null,
+    left: (playerX > 0)
+      ?
+      playerY * TILES_PER_ROW + (playerX - 1)
+      : null,
     player: playerY * TILES_PER_ROW + playerX,
   });
 
@@ -44,7 +48,7 @@ const TileGrid = ({ tiles, position, moves }) => {
     <div className={classes.flexContainer}>
       {
         tilesInFlexFlow.map(
-          (tile, index, {length}) => (
+          (tile, index, { length }) => (
             <TileCell
               tile={tile}
               changeQuadrant={moves.changeQuadrant}
