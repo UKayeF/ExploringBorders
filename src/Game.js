@@ -1,9 +1,9 @@
 import possibleMapTilenames from './game-generation/map-tiles';
-import { getPositionFromIndex } from './utils';
+import { getPositionFromIndex, inRange } from './utils';
 import { INVALID_MOVE } from 'boardgame.io/core';
 
-export const WIDTH = 20;
-export const HEIGHT = 20;
+export const TILES_PER_ROW = 20;
+export const ROW_COUNT = 20;
 
 const getRandomTilename = () => possibleMapTilenames[
   Math.floor(Math.random() * possibleMapTilenames.length)
@@ -11,18 +11,21 @@ const getRandomTilename = () => possibleMapTilenames[
 
 export const ExploringBorders = {
   setup: () => ({
-    width: WIDTH,
-    height: HEIGHT,
+    width: TILES_PER_ROW,
+    height: ROW_COUNT,
     position: { x: 0, y: 0 },
     tiles:
-      Array(HEIGHT * WIDTH).fill(null).map(
+      Array(ROW_COUNT * TILES_PER_ROW).fill(null).map(
         (_, index) => ({
           ...getPositionFromIndex(index),
           tile: getRandomTilename(),
         }),
       ),
+    turn: {
+      moveLimit: 1,
+    },
     moves: {
-      changeQuadrant: (G, ctx, direction) => {
+      clickCell: (G, ctx, direction) => {
         const { x, y } = G.position;
         let targetX = x, targetY = y;
         switch (direction) {
@@ -39,7 +42,10 @@ export const ExploringBorders = {
             targetX--;
             break;
         }
-        if (targetX < 0 || targetX >= WIDTH || targetY < 0 || targetY >= HEIGHT){
+        if (
+          !inRange({ min: 0, max: TILES_PER_ROW - 1 })(targetX) ||
+          !inRange({ min: 0, max: ROW_COUNT - 1 })(targetY)
+        ) {
           return INVALID_MOVE;
         }
         G.x = targetX;
