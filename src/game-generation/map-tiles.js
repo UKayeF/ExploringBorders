@@ -1,3 +1,8 @@
 export default [
-  'space_constellation',
+  'space_y_constellation',
+  'space_y_constellation',
+  'space_y_constellation',
+  'space_y_constellation',
+  'space_y_constellation',
+  'supernova',
 ]

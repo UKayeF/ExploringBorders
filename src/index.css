@@ -19,3 +19,7 @@ code {
 .space-tile {
   animation: play 2s steps(15) infinite;
 }
+
+.arrow:hover {
+  cursor: pointer;
+}

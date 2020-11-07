@@ -16,7 +16,7 @@ const useStyles = createUseStyles({
     width: CELL_WIDTH - 2,
     height: CELL_HEIGHT - 2,
     border: '1px solid black',
-    background: `url('../assets/spritesheets/space_y_constellation.png') left center`,
+    // background: `url('../assets/spritesheets/space_y_constellation.png') left center`,
   },
 })
 
@@ -46,10 +46,10 @@ const TileGrid = ({ tiles, position, moves }) => {
         tilesInFlexFlow.map(
           (tile, index, {length}) => (
             <TileCell
-              cell={tile}
+              tile={tile}
               changeQuadrant={moves.changeQuadrant}
               key={index}
-              className={`${classes.flexItem} space-tile`}
+              className={classes.flexItem}
               up={(length - index - 1) === up}
               down={(length - index - 1) === down}
               right={(length - index - 1) === right}
