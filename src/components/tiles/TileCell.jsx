@@ -34,11 +34,11 @@ const TileCell = (
     >
       {
         (up || down)
-          ? <img className='arrow' src={`../assets/spritesheets/arrow_${up ? 'up': 'down'}.png`}></img>
+          ? <img className='arrow' src={`../assets/spritesheets/arrow_${up ? 'up' : 'down'}.png`}/>
           : (right || left)
-          ? <img className='arrow' src={`../assets/spritesheets/arrow_${right ? 'right': 'left'}.png`}></img>
+          ? <img className='arrow' src={`../assets/spritesheets/arrow_${right ? 'right' : 'left'}.png`}/>
           : player
-            ? <img src='../assets/spritesheets/spaceship.png'></img>
+            ? <img src='../assets/spritesheets/spaceship.png'/>
             : ''
       }
     </div>
