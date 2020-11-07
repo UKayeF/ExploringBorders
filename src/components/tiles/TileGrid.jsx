@@ -4,6 +4,7 @@ import { TILES_PER_ROW } from '../../Game';
 import TileCell from './TileCell';
 
 const CELL_WIDTH = 32;
+const CELL_HEIGHT = 32;
 
 const useStyles = createUseStyles({
   flexContainer: {
@@ -12,7 +13,10 @@ const useStyles = createUseStyles({
     flexFlow: 'row-reverse wrap',
   },
   flexItem: {
-    width: CELL_WIDTH,
+    width: CELL_WIDTH - 2,
+    height: CELL_HEIGHT - 2,
+    border: '1px solid black',
+    background: `url('../assets/spritesheets/space_y_constellation.png') left center`,
   },
 })
 
@@ -45,7 +49,7 @@ const TileGrid = ({ tiles, position, moves }) => {
               cell={tile}
               changeQuadrant={moves.changeQuadrant}
               key={index}
-              className={classes.flexItem}
+              className={`${classes.flexItem} space-tile`}
               up={(length - index - 1) === up}
               down={(length - index - 1) === down}
               right={(length - index - 1) === right}
