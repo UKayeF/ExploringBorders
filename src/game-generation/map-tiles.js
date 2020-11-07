@@ -7,6 +7,13 @@ const green_planet = Array(1).fill('green_planet');
 const red_planet = Array(1).fill('red_planet');
 const solar_system = Array(1).fill('solar_system');
 
+/* Idea: tie potential event types and their likelihoods to map tiles
+  e.g. supernova -> high likelihood of "escape the explosion"-event
+       green_planet -> refit & rearm option
+       red_planet -> alien encounter?
+
+ */
+
 export default [
   ...arc_constellation,
   ...space_y_constellation,
