@@ -15,6 +15,7 @@ export const ExploringBorders = {
     height: ROW_COUNT,
     inSpaceMap: true,
     todoComplete: true,
+    activeTodo: null,
     position: { x: 0, y: 0, targetX: 0, targetY: 0 },
     tiles:
       Array(ROW_COUNT * TILES_PER_ROW).fill(null).map(
@@ -28,7 +29,7 @@ export const ExploringBorders = {
     moveLimit: 1,
   },
   moves: {
-    tryQuadrantChange: (G, ctx, direction) => {
+    tryQuadrantChange: (G, ctx, direction, activeTodo) => {
       const { x, y } = G.position;
       let targetX = x, targetY = y;
       switch (direction) {
@@ -53,6 +54,7 @@ export const ExploringBorders = {
       }
       G.inSpaceMap = false;
       G.todoComplete = false;
+      G.activeTodo = activeTodo;
       G.position.targetX = targetX;
       G.position.targetY = targetY;
     },
@@ -64,6 +66,7 @@ export const ExploringBorders = {
     },
     completeTodo: (G, ctx) => {
       G.todoComplete = true;
+      G.activeTodo = null;
     }
   },
 }

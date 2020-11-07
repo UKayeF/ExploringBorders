@@ -1,7 +1,12 @@
 import React from 'react';
 import PressRedButton from './todos/PressRedButton';
+import CompleteChecklist from './todos/CompleteChecklist';
+
+const MINIGAME_COUNT = 2; // Red Button, Checklist
 
 const MiniGame = (props) => {
+  const todoRNG = props.G.activeTodo !== null ? props.G.activeTodo : NaN;
+  const minigameIndex = Math.floor(todoRNG * MINIGAME_COUNT);
   return (
     <div>
       <button onClick={() => props.moves.completeQuadrantChange()}>
@@ -11,7 +16,14 @@ const MiniGame = (props) => {
             : 'Complete Todo to complete the quadrant change!'
         }
       </button>
-      <PressRedButton completeTodo={() => props.moves.completeTodo()}/>
+      {
+        minigameIndex === 0
+          ? <PressRedButton completeTodo={() => props.moves.completeTodo()}/> : null
+      }
+      {
+        minigameIndex === 1
+          ? <CompleteChecklist completeTodo={() => props.moves.completeTodo()}/> : null
+      }
     </div>
   );
 };

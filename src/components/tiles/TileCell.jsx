@@ -16,14 +16,15 @@ const TileCell = (
     left,
     player,
     tile,
+    last,
   },
 ) => {
   const classes = useStyles({ tile, player });
   const onClick = () => {
-    if (up) return tryQuadrantChange('up');
-    if (down) return tryQuadrantChange('down');
-    if (left) return tryQuadrantChange('left');
-    if (right) return tryQuadrantChange('right');
+    if (up) return tryQuadrantChange('up', Math.random());
+    if (down) return tryQuadrantChange('down', Math.random());
+    if (left) return tryQuadrantChange('left', Math.random());
+    if (right) return tryQuadrantChange('right', Math.random());
   }
 
   const spaceTile = player ? '' : 'space-tile';
@@ -32,6 +33,9 @@ const TileCell = (
       onClick={onClick}
       className={`${className} ${spaceTile} ${classes.tile} ${classes.player}`}
     >
+      {
+        last ? <img className='finish' src='../assets/spritesheets/finish_gate_green.png'/> : null
+      }
       {
         (up || down)
           ? <img className='arrow' src={`../assets/spritesheets/arrow_${up ? 'up' : 'down'}.png`}/>

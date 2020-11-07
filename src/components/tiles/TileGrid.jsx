@@ -59,6 +59,7 @@ const TileGrid = ({ tiles, position, moves }) => {
               right={(length - index - 1) === right}
               left={(length - index - 1) === left}
               player={(length - index - 1) === player}
+              last={index === 0}
             />
           ),
         )
