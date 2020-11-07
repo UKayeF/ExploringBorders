@@ -26,27 +26,31 @@ const TileGrid = ({ tiles, position, moves }) => {
       <:-9-8-7-<
      */
   );
-  const handleTileClick = ({ x: tileX, y: tileY }) => {
-    const distanceY = tileY - playerY;
-    const distanceX = tileX - playerX;
-    const adjacent = Math.abs(distanceX) + Math.abs(distanceY) === 1;
-    if (!adjacent) return;
-    if (distanceY === 1) moves.changeQuadrant('up')
-    if (distanceY === -1) moves.changeQuadrant('down')
-    if (distanceX === 1) moves.changeQuadrant('right')
-    if (distanceX === -1) moves.changeQuadrant('left')
-  }
+  const getAdjacentTileIndices = () => ({
+    up: (playerY + 1) * TILES_PER_ROW + playerX,
+    down: (playerY - 1) * TILES_PER_ROW + playerX,
+    right: playerY * TILES_PER_ROW + (playerX + 1),
+    left: playerY * TILES_PER_ROW + (playerX - 1),
+    player: playerY * TILES_PER_ROW + playerX,
+  });
+
+  const { up, down, right, left, player } = getAdjacentTileIndices();
 
   return (
     <div className={classes.flexContainer}>
       {
         tilesInFlexFlow.map(
-          (tile, index) => (
+          (tile, index, {length}) => (
             <TileCell
               cell={tile}
-              onClick={() => handleTileClick(tile)}
+              changeQuadrant={moves.changeQuadrant}
               key={index}
               className={classes.flexItem}
+              up={(length - index - 1) === up}
+              down={(length - index - 1) === down}
+              right={(length - index - 1) === right}
+              left={(length - index - 1) === left}
+              player={(length - index - 1) === player}
             />
           ),
         )
