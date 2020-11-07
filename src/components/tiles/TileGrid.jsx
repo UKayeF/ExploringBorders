@@ -51,7 +51,7 @@ const TileGrid = ({ tiles, position, moves }) => {
           (tile, index, { length }) => (
             <TileCell
               tile={tile}
-              changeQuadrant={moves.changeQuadrant}
+              tryQuadrantChange={moves.tryQuadrantChange}
               key={index}
               className={classes.flexItem}
               up={(length - index - 1) === up}

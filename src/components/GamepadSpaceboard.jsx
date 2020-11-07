@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react';
 import SpaceBoard from './SpaceBoard';
 import Gamepad from './gamepad/Gamepad';
-import { stadia, xbox } from './gamepad/layouts';
+import { xbox } from './gamepad/layouts';
+import MiniGame from './MiniGame';
 
 const GamepadSpaceboard = (props) => {
-  console.log(props);
   useEffect(() => {
     document.addEventListener('keyup', evt => {
       switch (evt.key) {
         case 'w':
         case 'ArrowUp':
-          props.moves.changeQuadrant('up');
+          props.moves.tryQuadrantChange('up');
           break;
         case 's':
         case 'ArrowDown':
-          props.moves.changeQuadrant('down');
+          props.moves.tryQuadrantChange('down');
           break;
         case 'd':
         case 'ArrowRight':
-          props.moves.changeQuadrant('right');
+          props.moves.tryQuadrantChange('right');
           break;
         case 'a':
         case 'ArrowLeft':
-          props.moves.changeQuadrant('left');
+          props.moves.tryQuadrantChange('left');
           break;
       }
     })
@@ -31,13 +31,38 @@ const GamepadSpaceboard = (props) => {
     <div>
       <Gamepad
         layout={xbox}
-        onUp={() => { props.moves.changeQuadrant('up')
+        onUp={() => {
+          props.G.inSpaceMap
+            ? props.moves.tryQuadrantChange('up')
+            : (() => {})()
         }}
-        onDown={() => props.moves.changeQuadrant('down')}
-        onRight={() => props.moves.changeQuadrant('right')}
-        onLeft={() => props.moves.changeQuadrant('left')}
+        onDown={() => {
+          props.G.inSpaceMap
+            ? props.moves.tryQuadrantChange('down')
+            : (() => {})()
+        }}
+        onRight={() => {
+          props.G.inSpaceMap
+            ? props.moves.tryQuadrantChange('right')
+            : (() => {})()
+        }}
+        onLeft={() => {
+          props.G.inSpaceMap
+            ? props.moves.tryQuadrantChange('left')
+            : (() => {})()
+        }}
+        onA={() => {
+          props.G.inSpaceMap
+            ? (() => {})()
+            : props.moves.completeQuadrantChange()
+        }}
       />
-      <SpaceBoard {...props}/>
+      {
+        props.G.inSpaceMap
+          ? <SpaceBoard {...props}/>
+          : <MiniGame {...props}/>
+      }
+
     </div>
   );
 };

@@ -8,7 +8,7 @@ const useStyles = createUseStyles({
 })
 const TileCell = (
   {
-    changeQuadrant,
+    tryQuadrantChange,
     className,
     up,
     down,
@@ -20,10 +20,10 @@ const TileCell = (
 ) => {
   const classes = useStyles({ tile, player });
   const onClick = () => {
-    if (up) return changeQuadrant('up');
-    if (down) return changeQuadrant('down');
-    if (left) return changeQuadrant('left');
-    if (right) return changeQuadrant('right');
+    if (up) return tryQuadrantChange('up');
+    if (down) return tryQuadrantChange('down');
+    if (left) return tryQuadrantChange('left');
+    if (right) return tryQuadrantChange('right');
   }
 
   const spaceTile = player ? '' : 'space-tile';

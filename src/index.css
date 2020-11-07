@@ -23,3 +23,11 @@ code {
 .arrow:hover {
   cursor: pointer;
 }
+
+@keyframes press {
+  100% { background-position: calc(-256 * 10px)}
+}
+
+.pressing {
+  animation: press 1s steps(10) 1;
+}
