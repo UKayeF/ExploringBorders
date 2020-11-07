@@ -49,8 +49,8 @@ export const ExploringBorders = {
       ) {
         return INVALID_MOVE;
       }
-      G.x = targetX;
-      G.y = targetY;
+      G.position.x = targetX;
+      G.position.y = targetY;
     },
   },
 }

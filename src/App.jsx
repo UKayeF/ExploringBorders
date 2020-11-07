@@ -7,7 +7,9 @@ import SpaceBoard from './components/SpaceBoard';
 const ExploringBordersClient = Client({
   game: ExploringBorders,
   board: SpaceBoard,
-  multiplayer: Local(),
+  numPlayers: 1,
+  multiplayer: false,
+  // multiplayer: Local(),
 });
 
 const App = () => (
