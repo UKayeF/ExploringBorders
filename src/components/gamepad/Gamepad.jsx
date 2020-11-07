@@ -160,6 +160,7 @@ export default class Gamepad extends Component {
     if (valueInvalid || axisInvalid) return;
 
     const invert = axisName.charAt(0) === '-';
+    const pureAxisName = axisName.substr(invert ? 1 : 0);
     const sign = invert ? -1 : 1;
     const signedValue = value * sign;
 
@@ -167,14 +168,14 @@ export default class Gamepad extends Component {
       ? 0
       : signedValue;
 
-    const previousValue = this.padState.axes[axisName];
+    const previousValue = this.padState.axes[pureAxisName];
     const valueUnchanged = previousValue === currentValue;
     if (valueUnchanged) return;
 
-    this.padState.axes[axisName] = currentValue;
-    this.props.onAxisChange(axisName, currentValue, previousValue);
+    this.padState.axes[pureAxisName] = currentValue;
+    this.props.onAxisChange(pureAxisName, currentValue, previousValue);
 
-    if (axisName === 'LeftStickX') {
+    if (pureAxisName === 'LeftStickX') {
       const directionChangeRight = (
         previousValue <= this.props.stickThreshold
         && currentValue > this.props.stickThreshold
@@ -183,12 +184,12 @@ export default class Gamepad extends Component {
 
       const directionChangeLeft = (
         previousValue >= -this.props.stickThreshold
-        && currentValue > -this.props.stickThreshold
+        && currentValue < -this.props.stickThreshold
       )
       if (directionChangeLeft) this.props.onLeft();
     }
 
-    if (axisName === 'LeftStickY') {
+    if (pureAxisName === 'LeftStickY') {
       const directionChangeUp = (
         previousValue <= this.props.stickThreshold
         && currentValue > this.props.stickThreshold
@@ -197,7 +198,7 @@ export default class Gamepad extends Component {
 
       const directionChangeDown = (
         previousValue >= -this.props.stickThreshold
-        && currentValue > -this.props.stickThreshold
+        && currentValue < -this.props.stickThreshold
       )
       if (directionChangeDown) this.props.onDown();
     }
@@ -206,7 +207,7 @@ export default class Gamepad extends Component {
 
   updateAllAxes = (gamepad) => {
     gamepad.axes
-      .map(({ value }, index) => ({
+      .map((value, index) => ({
         value,
         axisName: this.axisIndexToAxisName(index),
       }))
