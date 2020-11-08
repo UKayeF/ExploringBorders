@@ -98,5 +98,9 @@ export const ExploringBorders = {
       G.todoComplete = true;
       G.activeTodo = null;
     },
+    loseGame: (G, ctx) => {
+      ctx.events.endGame({ winner: 'Asteroid' });
+      return;
+    },
   },
 }
