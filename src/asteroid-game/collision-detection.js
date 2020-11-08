@@ -1,4 +1,4 @@
-export function detectCollision(spaceship, gameObject){
+export function detectCollision(spaceship, gameObject) {
   const noseOfSpaceship = spaceship.position.y;
   const tailOfSpaceship = spaceship.position.y + spaceship.height;
   const leftWingOfSpaceship = spaceship.position.x;
@@ -21,19 +21,21 @@ export function detectCollision(spaceship, gameObject){
 
   const rightWingCollision = (
     rightWingOfSpaceship >= leftSideOfObject
+    && leftWingOfSpaceship <= rightSideOfObject
     && noseOfSpaceship <= bottomOfObject
     && tailOfSpaceship >= topOfObject
   )
-  if (rightWingCollision){
+  if (rightWingCollision) {
     return true;
   }
 
   const leftWingCollision = (
     leftWingOfSpaceship <= rightSideOfObject
+    && rightWingOfSpaceship >= leftSideOfObject
     && noseOfSpaceship <= bottomOfObject
     && tailOfSpaceship >= topOfObject
   )
-  if (leftWingCollision){
+  if (leftWingCollision) {
     return true;
   }
 
