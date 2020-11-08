@@ -59,7 +59,7 @@ code {
     animation: travelling 1s steps(13) infinite;
 }
 
-#spaceship-image {
+#spaceship-image, #angry-asteroid-image {
     width: 32px;
     height: 32px;
     display: none;

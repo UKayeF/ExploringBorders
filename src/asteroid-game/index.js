@@ -1,25 +1,23 @@
-import SpaceShip from './space-ship';
-import InputHandler from './input-handler';
+import Game from './Game';
 
-export const initializeCanvas = ({ width, height }) => {
+export const initializeCanvas = ({ width, height, onFailure, onSuccess }) => {
   const canvas = document.getElementById('game-screen');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, width, height);
 
-  const spaceship = new SpaceShip(width, height);
-  spaceship.draw(ctx);
+  const game = new Game(width, height, onFailure, onSuccess);
+  game.start();
 
-  new InputHandler(spaceship);
   let lastTime = 0;
-  function gameLoop(timestamp){
+
+  function gameLoop(timestamp) {
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
     ctx.clearRect(0, 0, width, height);
-    spaceship.update(deltaTime);
-    spaceship.draw(ctx);
-
+    game.update(deltaTime);
+    game.draw(ctx);
     requestAnimationFrame(gameLoop)
   }
 

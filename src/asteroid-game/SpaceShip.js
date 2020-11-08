@@ -1,16 +1,16 @@
 export default class SpaceShip {
-  constructor(gameWidth, gameHeight) {
+  constructor(game) {
     this.width = 32;
     this.height = 32;
 
     this.position = {
-      x: (gameWidth / 2) - (this.width / 2),
-      y: gameHeight - this.height - 10,
+      x: (game.gameWidth / 2) - (this.width / 2),
+      y: game.gameHeight - this.height - 10,
     }
     this.image = document.getElementById('spaceship-image');
     this.maxSpeed = 3;
     this.speed = 0;
-    this.gameWidth = gameWidth;
+    this.gameWidth = game.gameWidth;
   }
 
   draw(ctx) {

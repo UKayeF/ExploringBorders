@@ -41,7 +41,9 @@ const GamepadSpaceboard = (props) => {
           ? 'We have succeeded!'
           : (winner === 'Black Hole')
             ? 'We entered a black hole and couldn\'t escape!'
-            : 'Maybe next time'
+            : (winner === 'Asteroid')
+              ? 'We had a collision with an asteroid. It won!'
+              : 'Maybe next time'
           : null
       }
       <Gamepad
