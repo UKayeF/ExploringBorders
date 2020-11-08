@@ -13,6 +13,14 @@ function IsVictory({ x, y }) {
   return (x === TILES_PER_ROW - 1 && y === ROW_COUNT - 1);
 }
 
+function FindRandomWhiteHole({ tiles }) {
+  const whiteHoles = tiles.filter(({ tile }) => tile === 'white_hole');
+  const randomWhiteHole = whiteHoles[
+    Math.floor(Math.random() * whiteHoles.length)
+    ];
+  return randomWhiteHole;
+}
+
 export const ExploringBorders = {
   setup: () => ({
     width: TILES_PER_ROW,
@@ -39,7 +47,7 @@ export const ExploringBorders = {
     }
   },
   moves: {
-    tryQuadrantChange: (G, ctx, direction, activeTodo) => {
+    tryQuadrantChange: (G, ctx, direction) => {
       const { x, y } = G.position;
       let targetX = x, targetY = y;
       switch (direction) {
@@ -62,11 +70,23 @@ export const ExploringBorders = {
       ) {
         return INVALID_MOVE;
       }
-      G.inSpaceMap = false;
-      G.todoComplete = false;
-      G.activeTodo = activeTodo;
+      const tileIndex = (targetY) * TILES_PER_ROW + (targetX - 0);
+      const destination = [...G.tiles][tileIndex];
+      const { x: tileX, y: tileY, tile } = { ...destination };
       G.position.targetX = targetX;
       G.position.targetY = targetY;
+      if (tile.match('black_hole') && !IsVictory({ x: tileX, y: tileY })) {
+        const destinationWhiteHole = FindRandomWhiteHole(G);
+        if (!destinationWhiteHole) {
+          ctx.events.endGame({ winner: 'Black Hole' });
+          return;
+        }
+        G.position.targetX = destinationWhiteHole.x;
+        G.position.targetY = destinationWhiteHole.y;
+      }
+      G.activeTodo = ctx.random.Die(4);
+      G.inSpaceMap = false;
+      G.todoComplete = false;
     },
     completeQuadrantChange: (G, ctx) => {
       if (!G.todoComplete) return INVALID_MOVE;

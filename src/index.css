@@ -43,7 +43,7 @@ code {
 }
 
 .logging-in {
-    animation: login 2s steps(14) 1;
+    animation: login 1s steps(14) 1;
 }
 
 #login-screen.logged-in {

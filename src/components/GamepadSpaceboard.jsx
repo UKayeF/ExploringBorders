@@ -9,45 +9,52 @@ const GamepadSpaceboard = (props) => {
     document.addEventListener('keyup', evt => {
       switch (evt.key) {
         case 'ArrowUp':
-          props.moves.tryQuadrantChange('up', Math.random());
+          props.moves.tryQuadrantChange('up');
           break;
         case 'ArrowDown':
-          props.moves.tryQuadrantChange('down', Math.random());
+          props.moves.tryQuadrantChange('down');
           break;
         case 'ArrowRight':
-          props.moves.tryQuadrantChange('right', Math.random());
+          props.moves.tryQuadrantChange('right');
           break;
         case 'ArrowLeft':
-          props.moves.tryQuadrantChange('left', Math.random());
+          props.moves.tryQuadrantChange('left');
           break;
       }
     })
   }, [])
+  const winner = props.ctx?.gameover?.winner;
   return (
     <div>
       {
-        props.ctx.gameover ? 'We have succeeded!' : null
+        props.ctx.gameover
+          ? (winner === props.ctx.currentPlayer)
+          ? 'We have succeeded!'
+          : (winner === 'Black Hole')
+            ? 'We entered a black hole and couldn\'t escape!'
+            : 'Maybe next time'
+          : null
       }
       <Gamepad
         layout={xbox}
         onUp={() => {
           props.G.inSpaceMap
-            ? props.moves.tryQuadrantChange('up', Math.random())
+            ? props.moves.tryQuadrantChange('up')
             : (() => {})()
         }}
         onDown={() => {
           props.G.inSpaceMap
-            ? props.moves.tryQuadrantChange('down', Math.random())
+            ? props.moves.tryQuadrantChange('down')
             : (() => {})()
         }}
         onRight={() => {
           props.G.inSpaceMap
-            ? props.moves.tryQuadrantChange('right', Math.random())
+            ? props.moves.tryQuadrantChange('right')
             : (() => {})()
         }}
         onLeft={() => {
           props.G.inSpaceMap
-            ? props.moves.tryQuadrantChange('left', Math.random())
+            ? props.moves.tryQuadrantChange('left')
             : (() => {})()
         }}
         onA={() => {

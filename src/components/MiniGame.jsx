@@ -4,11 +4,13 @@ import CompleteChecklist from './todos/CompleteChecklist';
 import ParkTheSpaceship from './todos/ParkTheSpaceship';
 import Login from './todos/Login';
 
-const MINIGAME_COUNT = 4; // Red Button, Checklist
-
 const MiniGame = (props) => {
-  const todoRNG = props.G.activeTodo !== null ? props.G.activeTodo : NaN;
-  const minigameIndex = Math.floor(todoRNG * MINIGAME_COUNT);
+  const minigameIndex = props.G.activeTodo;
+  if (props.G.todoComplete){
+    setTimeout(() => {
+      props.moves.completeQuadrantChange();
+    }, 400)
+  }
   return (
     <div>
       <button onClick={() => props.moves.completeQuadrantChange()}>
@@ -19,19 +21,19 @@ const MiniGame = (props) => {
         }
       </button>
       {
-        minigameIndex === 0
+        minigameIndex === 1
           ? <PressRedButton completeTodo={() => props.moves.completeTodo()}/> : null
       }
       {
-        minigameIndex === 1
+        minigameIndex === 2
           ? <CompleteChecklist completeTodo={() => props.moves.completeTodo()}/> : null
       }
       {
-        minigameIndex === 2
+        minigameIndex === 3
           ? <ParkTheSpaceship completeTodo={() => props.moves.completeTodo()}/> : null
       }
       {
-        minigameIndex === 3
+        minigameIndex === 4
           ? <Login completeTodo={() => props.moves.completeTodo()}/> : null
       }
     </div>

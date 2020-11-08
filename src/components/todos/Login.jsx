@@ -18,10 +18,10 @@ const Login = ({ completeTodo }) => {
     window.setTimeout(() => {
       loginScreen.classList.remove('logging-in');
       loginScreen.classList.add('logged-in');
-    }, 2000)
+    }, 1000)
     window.setTimeout(() => {
       completeTodo();
-    }, 3000);
+    }, 1500);
 
   }
   const validatePassword = (evt) => {

@@ -21,10 +21,10 @@ const TileCell = (
 ) => {
   const classes = useStyles({ tile, player });
   const onClick = () => {
-    if (up) return tryQuadrantChange('up', Math.random());
-    if (down) return tryQuadrantChange('down', Math.random());
-    if (left) return tryQuadrantChange('left', Math.random());
-    if (right) return tryQuadrantChange('right', Math.random());
+    if (up) return tryQuadrantChange('up');
+    if (down) return tryQuadrantChange('down');
+    if (left) return tryQuadrantChange('left');
+    if (right) return tryQuadrantChange('right');
   }
 
   const spaceTile = player ? '' : 'space-tile';
