@@ -49,3 +49,18 @@ code {
 #login-screen.logged-in {
     background-position: calc(-256 * 14px)
 }
+
+@keyframes travel {
+    100% {
+        background-position: calc(-256 * 13px);
+    }
+}
+#game-screen {
+    animation: travelling 1s steps(13) infinite;
+}
+
+#spaceship-image {
+    width: 32px;
+    height: 32px;
+    display: none;
+}
