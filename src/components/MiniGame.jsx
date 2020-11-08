@@ -1,8 +1,9 @@
 import React from 'react';
 import PressRedButton from './todos/PressRedButton';
 import CompleteChecklist from './todos/CompleteChecklist';
+import ParkTheSpaceship from './todos/ParkTheSpaceship';
 
-const MINIGAME_COUNT = 2; // Red Button, Checklist
+const MINIGAME_COUNT = 3; // Red Button, Checklist
 
 const MiniGame = (props) => {
   const todoRNG = props.G.activeTodo !== null ? props.G.activeTodo : NaN;
@@ -12,7 +13,7 @@ const MiniGame = (props) => {
       <button onClick={() => props.moves.completeQuadrantChange()}>
         {
           props.G.todoComplete
-            ? 'Click here to return to space map!'
+            ? 'Success! Click here to return to space map!'
             : 'Complete Todo to complete the quadrant change!'
         }
       </button>
@@ -23,6 +24,10 @@ const MiniGame = (props) => {
       {
         minigameIndex === 1
           ? <CompleteChecklist completeTodo={() => props.moves.completeTodo()}/> : null
+      }
+      {
+        minigameIndex === 2
+        ? <ParkTheSpaceship completeTodo={() => props.moves.completeTodo()}/> : null
       }
     </div>
   );
