@@ -2,8 +2,9 @@ import React from 'react';
 import PressRedButton from './todos/PressRedButton';
 import CompleteChecklist from './todos/CompleteChecklist';
 import ParkTheSpaceship from './todos/ParkTheSpaceship';
+import Login from './todos/Login';
 
-const MINIGAME_COUNT = 3; // Red Button, Checklist
+const MINIGAME_COUNT = 4; // Red Button, Checklist
 
 const MiniGame = (props) => {
   const todoRNG = props.G.activeTodo !== null ? props.G.activeTodo : NaN;
@@ -27,7 +28,11 @@ const MiniGame = (props) => {
       }
       {
         minigameIndex === 2
-        ? <ParkTheSpaceship completeTodo={() => props.moves.completeTodo()}/> : null
+          ? <ParkTheSpaceship completeTodo={() => props.moves.completeTodo()}/> : null
+      }
+      {
+        minigameIndex === 3
+          ? <Login completeTodo={() => props.moves.completeTodo()}/> : null
       }
     </div>
   );

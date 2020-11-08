@@ -1,33 +1,51 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 @keyframes play {
-  100% { background-position: calc(32*15px)}
+    100% {
+        background-position: calc(32 * 15px)
+    }
 }
 
 .space-tile {
-  animation: play 2s steps(15) infinite;
+    animation: play 2s steps(15) infinite;
 }
 
 .arrow:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 @keyframes press {
-  100% { background-position: calc(-256 * 10px)}
+    100% {
+        background-position: calc(-256 * 10px)
+    }
 }
 
 .pressing {
-  animation: press 1s steps(10) 1;
+    animation: press 1s steps(10) 1;
+}
+
+@keyframes login {
+    100% {
+        background-position: calc(-256 * 14px)
+    }
+}
+
+.logging-in {
+    animation: login 2s steps(14) 1;
+}
+
+#login-screen.logged-in {
+    background-position: calc(-256 * 14px)
 }
