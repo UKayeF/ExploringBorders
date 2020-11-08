@@ -84,7 +84,7 @@ export const ExploringBorders = {
         G.position.targetX = destinationWhiteHole.x;
         G.position.targetY = destinationWhiteHole.y;
       }
-      G.activeTodo = ctx.random.Die(4);
+      G.activeTodo = ctx.random.Die(5);
       G.inSpaceMap = false;
       G.todoComplete = false;
     },

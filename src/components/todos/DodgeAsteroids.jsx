@@ -19,24 +19,29 @@ const useStyles = createUseStyles({
 const GAME_WIDTH = 256;
 const GAME_HEIGHT = 256;
 
-const DodgeAsteroids = ({ completeTodo }) => {
-  /* Idea:
-       Spawn asteroids from the top margin of the asteroid-field
-       Spaceship can go left/right, controlled by mouse cursor
-       Collision if asteroids intersect with space ship
-   */
+const DodgeAsteroids = ({ completeTodo, endGame }) => {
   const classes = useStyles();
-  const [done, setDone] = useState(false);
-  const [canvas, setCanvas] = useState(null);
-  setTimeout(() => {
-    setDone(true);
-  }, 10000);
-  setInterval(() => {
-    const currentCanvas = document.getElementById('game-screen');
-  })
+  const [failure, setFailure] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   useEffect(() => {
-    initializeCanvas({ width: GAME_WIDTH, height: GAME_HEIGHT });
+    initializeCanvas({
+      width: GAME_WIDTH,
+      height: GAME_HEIGHT,
+      onFailure: () => {
+        setFailure(true);
+        endGame();
+      },
+      onSuccess: () => {
+        setSuccess(true);
+        window.setTimeout(() => {
+          completeTodo();
+        })
+      }
+    });
   })
+  if (failure) return null;
+  if (success) return <p>We escaped from the asteroid field!</p>
   return (
     <div>
       <canvas

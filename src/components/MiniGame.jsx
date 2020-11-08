@@ -3,10 +3,11 @@ import PressRedButton from './todos/PressRedButton';
 import CompleteChecklist from './todos/CompleteChecklist';
 import ParkTheSpaceship from './todos/ParkTheSpaceship';
 import Login from './todos/Login';
+import DodgeAsteroids from './todos/DodgeAsteroids';
 
 const MiniGame = (props) => {
   const minigameIndex = props.G.activeTodo;
-  if (props.G.todoComplete){
+  if (props.G.todoComplete) {
     setTimeout(() => {
       props.moves.completeQuadrantChange();
     }, 400)
@@ -35,6 +36,17 @@ const MiniGame = (props) => {
       {
         minigameIndex === 4
           ? <Login completeTodo={() => props.moves.completeTodo()}/> : null
+      }
+      {
+        minigameIndex === 5
+          ? (
+            <DodgeAsteroids
+              completeTodo={() => props.moves.completeTodo()}
+              endGame={() => {
+                props.moves.loseGame()
+              }}
+            />
+          ) : null
       }
     </div>
   );
