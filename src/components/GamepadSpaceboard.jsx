@@ -6,7 +6,7 @@ import MiniGame from './MiniGame';
 
 const GamepadSpaceboard = (props) => {
   useEffect(() => {
-    document.addEventListener('keyup', evt => {
+    const callback = evt => {
       if (!props.G.inSpaceMap) return;
 
       switch (evt.key) {
@@ -27,8 +27,11 @@ const GamepadSpaceboard = (props) => {
           props.moves.tryQuadrantChange('left');
           break;
       }
-    })
-  }, [])
+    }
+    document.addEventListener('keyup', callback);
+
+    return () => document.removeEventListener('keyup', callback)
+  }, [props.G.inSpaceMap])
   const winner = props.ctx?.gameover?.winner;
   return (
     <div>
