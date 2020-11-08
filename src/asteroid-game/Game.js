@@ -20,9 +20,8 @@ export default class Game {
   start() {
     this.countdown = 200000;
     this.spaceship = new SpaceShip(this)
-    this.asteroid = new Asteroid(this, 100);
     const getSlotX = () => Math.floor(Math.random() * 8) * 32;
-    const randomAsteroids = new Array(40).fill(32)
+    const randomAsteroids = new Array(40).fill(64)
       .map((value, index) => value * index)
       .map(offset => new Asteroid(this, getSlotX(), -offset));
 
