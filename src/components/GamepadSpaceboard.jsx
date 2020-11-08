@@ -7,16 +7,22 @@ import MiniGame from './MiniGame';
 const GamepadSpaceboard = (props) => {
   useEffect(() => {
     document.addEventListener('keyup', evt => {
+      if (!props.G.inSpaceMap) return;
+
       switch (evt.key) {
+        case 'w':
         case 'ArrowUp':
           props.moves.tryQuadrantChange('up');
           break;
+        case 's':
         case 'ArrowDown':
           props.moves.tryQuadrantChange('down');
           break;
+        case 'd':
         case 'ArrowRight':
           props.moves.tryQuadrantChange('right');
           break;
+        case 'a':
         case 'ArrowLeft':
           props.moves.tryQuadrantChange('left');
           break;
