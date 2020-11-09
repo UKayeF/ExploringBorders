@@ -34,9 +34,7 @@ const DodgeAsteroids = ({ completeTodo, endGame }) => {
       },
       onSuccess: () => {
         setSuccess(true);
-        window.setTimeout(() => {
-          completeTodo();
-        })
+        completeTodo();
       }
     });
   })
