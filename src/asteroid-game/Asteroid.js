@@ -10,7 +10,7 @@ export default class Asteroid {
       y: spawningY,
     }
     this.image = document.getElementById('angry-asteroid-image');
-    this.speed = .7
+    this.speed = 1.2;
     this.gameWidth = game.gameWidth;
     this.gameHeight = game.gameHeight;
     this.game = game;

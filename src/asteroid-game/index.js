@@ -3,6 +3,9 @@ import Game from './Game';
 export const initializeCanvas = ({ width, height, onFailure, onSuccess }) => {
   const canvas = document.getElementById('game-screen');
   if (!canvas) return;
+  window.setTimeout(() => {
+    onSuccess();
+  }, 15000)
 
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, width, height);
