@@ -21,6 +21,14 @@ function FindRandomWhiteHole({ tiles }) {
   return randomWhiteHole;
 }
 
+function FindRandomBlackHole({ tiles }) {
+  const blackHoles = tiles.filter(({ tile }) => tile === 'black_hole');
+  const randomBlackHole = blackHoles[
+    Math.floor(Math.random() * blackHoles.length)
+    ];
+  return randomBlackHole;
+}
+
 export const ExploringBorders = {
   setup: () => ({
     width: TILES_PER_ROW,
@@ -84,6 +92,16 @@ export const ExploringBorders = {
         G.position.targetX = destinationWhiteHole.x;
         G.position.targetY = destinationWhiteHole.y;
       }
+      if (tile.match('white_hole') && !IsVictory({ x: tileX, y: tileY })){
+        const destinationBlackHole = FindRandomBlackHole(G);
+        if (!destinationBlackHole) {
+          ctx.events.endGame({ winner: 'White Hole' });
+          return;
+        }
+        G.position.targetX = destinationBlackHole.x;
+        G.position.targetY = destinationBlackHole.y;
+      }
+
       G.activeTodo = ctx.random.Die(5);
       G.inSpaceMap = false;
       G.todoComplete = false;
