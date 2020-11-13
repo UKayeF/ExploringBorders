@@ -8,17 +8,16 @@ const GAMESTATES = {
   WIN: 1,
 }
 export default class Game {
-  constructor(gameWidth, gameHeight, onFailure, onSuccess) {
+  constructor(gameWidth, gameHeight, onFailure, endGameLoop) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.lives = 1;
     this.gamestate = GAMESTATES.RUNNING;
     this.onFailure = onFailure;
-    this.onSuccess = onSuccess;
+    this.endGameLoop = endGameLoop;
   }
 
   start() {
-    this.countdown = 200000;
     this.spaceship = new SpaceShip(this)
     const getSlotX = () => Math.floor(Math.random() * 8) * 32;
     const randomAsteroids = new Array(40).fill(64)
@@ -34,17 +33,12 @@ export default class Game {
   }
 
   update(deltaTime) {
-    if (this.gamestate === GAMESTATES.WIN || this.gamestate === GAMESTATES.LOSS){
+    if (this.gamestate === GAMESTATES.WIN || this.gamestate === GAMESTATES.LOSS) {
       return;
     }
-    this.countdown -= deltaTime;
-    if (this.countdown <= 0){
-      this.gamestate = GAMESTATES.WIN;
-      this.onSuccess();
-      return;
-    }
-    if (this.lives === 0){
+    if (this.lives === 0) {
       this.gamestate = GAMESTATES.LOSS;
+      this.endGameLoop();
       this.onFailure();
       return;
     }

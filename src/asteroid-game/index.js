@@ -3,16 +3,19 @@ import Game from './Game';
 export const initializeCanvas = ({ width, height, onFailure, onSuccess }) => {
   const canvas = document.getElementById('game-screen');
   if (!canvas) return;
-  window.setTimeout(() => {
-    onSuccess();
-  }, 15000)
 
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, width, height);
 
-  const game = new Game(width, height, onFailure, onSuccess);
+  let active = true;
+  const endGameLoop = () => active = false;
+  const game = new Game(width, height, onFailure, endGameLoop);
   game.start();
 
+  window.setTimeout(() => {
+    onSuccess();
+    active = false;
+  }, 15000)
   let lastTime = 0;
 
   function gameLoop(timestamp) {
@@ -21,7 +24,7 @@ export const initializeCanvas = ({ width, height, onFailure, onSuccess }) => {
     ctx.clearRect(0, 0, width, height);
     game.update(deltaTime);
     game.draw(ctx);
-    requestAnimationFrame(gameLoop)
+    active && requestAnimationFrame(gameLoop)
   }
 
   gameLoop(lastTime);
