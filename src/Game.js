@@ -22,7 +22,7 @@ function FindRandomWhiteHole({ tiles }) {
 }
 
 function FindRandomBlackHole({ tiles }) {
-  const blackHoles = tiles.filter(({ tile }) => tile === 'black_hole');
+  const blackHoles = tiles.filter(({ tile }) => tile.match('black_hole'));
   const randomBlackHole = blackHoles[
     Math.floor(Math.random() * blackHoles.length)
     ];
