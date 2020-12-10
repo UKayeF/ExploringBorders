@@ -20,7 +20,7 @@ export default class Game {
   start() {
     this.spaceship = new SpaceShip(this)
     const getSlotX = () => Math.floor(Math.random() * 8) * 32;
-    const randomAsteroids = new Array(40).fill(64)
+    const randomAsteroids = new Array(40).fill(80)
       .map((value, index) => value * index)
       .map(offset => new Asteroid(this, getSlotX(), -offset));
 
